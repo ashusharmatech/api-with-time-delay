@@ -10,11 +10,17 @@ import org.springframework.web.bind.annotation.RestController
 class ApiController {
     var logger: Logger = LoggerFactory.getLogger(ApiController::class.java)
 
+    @GetMapping
+    fun getDocument(): String {
+        return "call the api with number of seconds you want to delay response too. " +
+                "<br> for example : /10 this will delay the response by 10 seconds"
+    }
+
     /**
      * This method will delay the response by the number of seconds passed as argument
      */
     @GetMapping("/{secondsToDelay}")
-    fun main(@PathVariable secondsToDelay: Integer): String {
+    fun main(@PathVariable secondsToDelay: Int): String {
         logger.info("Going for sleep for $secondsToDelay seconds")
         try {
             Thread.sleep((secondsToDelay.toInt() * 1000).toLong())
